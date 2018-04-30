@@ -14,10 +14,7 @@ public class EnemySpawner : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        Invoke("SpawnEnemy", maxSpawnRateInSeconds);
 
-        //increase spawn rate every 30 seconds
-        InvokeRepeating("IncreaseSpawnRate", 0f, 30f);
 	}
 	
 	// Update is called once per frame
@@ -74,5 +71,21 @@ public class EnemySpawner : MonoBehaviour
         {
             CancelInvoke("IncreaseSpawnRate");
         }
+    }
+
+    //function to start enemy spawner
+    public void ScheduleEnemySpawner()
+    {
+        Invoke("SpawnEnemy", maxSpawnRateInSeconds);
+
+        //increase spawn rate every 30 seconds
+        InvokeRepeating("IncreaseSpawnRate", 0f, 30f);
+    }
+
+    //function to stop spawner
+    public void UnscheduleEnemySpawner()
+    {
+        CancelInvoke("SpawnEnemy");
+        CancelInvoke("IncreaseSpawnRate");
     }
 }
