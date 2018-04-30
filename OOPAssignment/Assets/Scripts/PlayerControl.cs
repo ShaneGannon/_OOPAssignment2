@@ -27,6 +27,9 @@ public class PlayerControl : MonoBehaviour
         //update lives UI text
         LivesUIText.text = lives.ToString();
 
+        //reset player pos to center screen
+        transform.position = new Vector2(0, 0);
+
         //set player GO to active
         gameObject.SetActive(true);
     }

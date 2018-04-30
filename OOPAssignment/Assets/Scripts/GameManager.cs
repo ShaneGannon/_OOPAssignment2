@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    //reference to the game objects
+    //references to the game objects
     public GameObject playButton;
     public GameObject playerShip;
     public GameObject enemySpawner;//reference to enemy spawner
     public GameObject GameOverGo;
+    public GameObject scoreUITextGo;
 
     public enum GameManagerState
     {
@@ -41,6 +42,9 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameManagerState.Gameplay:
+
+                //reset score
+                scoreUITextGo.GetComponent<GameScore>().Score = 0;
 
                 //hide play button during gameplay
                 playButton.SetActive(false);
