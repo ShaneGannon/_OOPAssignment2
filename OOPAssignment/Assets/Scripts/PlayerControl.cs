@@ -1,17 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
+    public GameObject GameManagerGo;//reference to game manager
+
     public GameObject PlayerBulletGo;//players bullet prefab
     public GameObject BulletPosition01;
     public GameObject BulletPosition02;
+    public GameObject ExplosionGo;//explosion prefab
+
+    //reference to the lives UI text
+    public Text LivesUIText;
+
+    const int MaxLives = 3;//max player lives
+    int lives; //current player lives
 
     public float speed;
 
-	// Use this for initialization
-	void Start ()
+    public void Init()
+    {
+        lives = MaxLives;
+
+        //update lives UI text
+        LivesUIText.text = lives.ToString();
+
+        //set player GO to active
+        gameObject.SetActive(true);
+    }
+
+    // Use this for initialization
+    void Start ()
     {
 		
 	}
@@ -76,7 +97,29 @@ public class PlayerControl : MonoBehaviour
         //detect collisions of the player ship with enemy ship or enemy bullet
         if ((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag")) 
         {
-            Destroy(gameObject);//destroy player on collision
+            PlayExplosion();
+
+            lives--;//life counter
+            LivesUIText.text = lives.ToString();//update UI 
+
+            if (lives == 0)//use life counter to control when destroyed
+            {
+                //change game manager state to game over state
+                GameManagerGo.GetComponent<GameManager>().SetGameManagerState(GameManager.GameManagerState.GameOver);
+
+                //hide player ship for the moment
+                gameObject.SetActive(false);
+                //Destroy(gameObject);destroy player on collision
+            }
         }
+    }
+
+    //function to instatiate explosion
+    void PlayExplosion()
+    {
+        GameObject explosion = (GameObject)Instantiate(ExplosionGo);
+
+        //set position of explosion to ship position
+        explosion.transform.position = transform.position;
     }
 }

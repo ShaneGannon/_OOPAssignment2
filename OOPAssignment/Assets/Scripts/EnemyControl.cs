@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour
 {
+    public GameObject ExplosionGo;//explosion prefab
+
     //enemy speed
     float speed;
 
@@ -41,7 +43,18 @@ public class EnemyControl : MonoBehaviour
         //detect collisions with player ship or player bullets
         if ((col.tag == "PlayerShipTag") || (col.tag == "PlayerBulletTag")) 
         {
+            PlayExplosion();
+
             Destroy(gameObject);//destroy enemy ship
         }
+    }
+
+    //function to instatiate explosion
+    void PlayExplosion()
+    {
+        GameObject explosion = (GameObject)Instantiate(ExplosionGo);
+
+        //set position of explosion to ship position
+        explosion.transform.position = transform.position;
     }
 }

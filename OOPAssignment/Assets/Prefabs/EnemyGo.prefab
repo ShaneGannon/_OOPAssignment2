@@ -126,6 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ff8aa25c7ac9a498886edda5eb4bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExplosionGo: {fileID: 1321313555343828, guid: 2e44b4e986720e140a02526fac2f6292,
+    type: 2}
 --- !u!114 &114978872326753350
 MonoBehaviour:
   m_ObjectHideFlags: 1
