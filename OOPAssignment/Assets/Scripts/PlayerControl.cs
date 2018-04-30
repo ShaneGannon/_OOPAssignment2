@@ -70,4 +70,13 @@ public class PlayerControl : MonoBehaviour
         //update player position
         transform.position = pos;
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        //detect collisions of the player ship with enemy ship or enemy bullet
+        if ((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag")) 
+        {
+            Destroy(gameObject);//destroy player on collision
+        }
+    }
 }
