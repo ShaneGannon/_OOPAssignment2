@@ -46,6 +46,9 @@ public class PlayerControl : MonoBehaviour
         //fire bullet when spacebar is pressed
         if (Input.GetKeyDown("space"))
         {
+            //play the laser sound
+            gameObject.GetComponent<AudioSource>().Play();
+
             //instantiate the first bullet object
             GameObject bullet01 = (GameObject)Instantiate(PlayerBulletGo);
             //set bullet initial position

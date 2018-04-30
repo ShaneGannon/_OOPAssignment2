@@ -7,9 +7,10 @@ public class GameManager : MonoBehaviour
     //references to the game objects
     public GameObject playButton;
     public GameObject playerShip;
-    public GameObject enemySpawner;//reference to enemy spawner
+    public GameObject enemySpawner;
     public GameObject GameOverGo;
     public GameObject scoreUITextGo;
+    public GameObject GameTitleGo;
 
     public enum GameManagerState
     {
@@ -36,6 +37,9 @@ public class GameManager : MonoBehaviour
                 //hide game over screen 
                 GameOverGo.SetActive(false);
 
+                //display game title
+                GameTitleGo.SetActive(true);
+
                 //set play button visible
                 playButton.SetActive(true);
 
@@ -46,8 +50,9 @@ public class GameManager : MonoBehaviour
                 //reset score
                 scoreUITextGo.GetComponent<GameScore>().Score = 0;
 
-                //hide play button during gameplay
+                //hide play button and title during gameplay
                 playButton.SetActive(false);
+                GameTitleGo.SetActive(false);
 
                 //set player visible and initialise lives
                 playerShip.GetComponent<PlayerControl>().Init();
