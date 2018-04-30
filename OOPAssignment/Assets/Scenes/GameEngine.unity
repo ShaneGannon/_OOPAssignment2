@@ -388,6 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyGo: {fileID: 1536060739574244, guid: 058ebd6902283b24a985d112e0a39d73, type: 2}
+  maxSpawnRateInSeconds: 5
 --- !u!4 &2094388563
 Transform:
   m_ObjectHideFlags: 0
