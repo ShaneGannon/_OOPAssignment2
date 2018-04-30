@@ -15,6 +15,9 @@ public class EnemySpawner : MonoBehaviour
 	void Start ()
     {
         Invoke("SpawnEnemy", maxSpawnRateInSeconds);
+
+        //increase spawn rate every 30 seconds
+        InvokeRepeating("IncreaseSpawnRate", 0f, 30f);
 	}
 	
 	// Update is called once per frame
@@ -38,6 +41,38 @@ public class EnemySpawner : MonoBehaviour
         //spawn enemy across top of the screen
         anEnemy.transform.position = new Vector2(Random.Range(min.x, max.x), max.y);
 
+        //schedule enemy spawns
+        ScheduleNextEnemySpawn();
     }
 
+    //fucntion to schedule enemy spawn rate
+    void ScheduleNextEnemySpawn()
+    {
+        float spawnInSeconds;
+
+        if (maxSpawnRateInSeconds > 1f)
+        {
+            //pick a number between 1 and max respawn rate
+            spawnInSeconds = Random.Range(1f, maxSpawnRateInSeconds);
+        }
+
+        else
+            spawnInSeconds = 1f;
+
+        Invoke("SpawnEnemy", spawnInSeconds);
+    }
+
+    //function to pregressively increase difficulty
+    void IncreaseSpawnRate()
+    {
+        if (maxSpawnRateInSeconds > 1f)
+        {
+            maxSpawnRateInSeconds--;
+        }
+
+        if (maxSpawnRateInSeconds == 1f)
+        {
+            CancelInvoke("IncreaseSpawnRate");
+        }
+    }
 }
